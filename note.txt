@@ -1,0 +1,6 @@
+合并无合并历史的分支:git pull origin master --allow-unrelated-histories
+静态库同一目录下gcc方法: gcc 文件名 -o 可执行文件名 -L. -l静态库名字
+静态库不同目录下gcc方法 gcc 文件名 -o 可执行文件名 -L库文件绝对或者相对位置 -l静态库名字 -I头文件的绝对或者相对位置
+动态库同一目录下gcc方法 gcc  -o 可执行文件名 文件名字 ./动态库 
+动态库不同目录下gcc方法 gcc  -o 可执行文件名 文件名字 动态库位置 头文件位置
+
