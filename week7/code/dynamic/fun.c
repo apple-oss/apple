@@ -1,56 +1,7 @@
-#include <assert.h>
-#include <sys/types.h>
-#include <errno.h>
-#include <limits.h>
-#include <string.h>
-#include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include <syslog.h>
-#include <fcntl.h>
-#include <sys/stat.h>
+#include "stand.h"
 
-void Menu();
-void Creatfile(FILE *fp);
-void Readfile(FILE *fp);
-void Alterfileauthority(FILE *fp);
-void Viewfileauthority();
-
-int main()
-{
-     char choice;
-     FILE *fp;
-     Menu();
-     choice = getchar();
-     switch(choice){
-      case '0' : 
-         printf("退出系统\n");
-         exit(0);
-        break;
-      case '1' : 
-         Creatfile(fp);
-        break;
-      case '2' : 
-         Writefile(fp);
-        break;
-      case '3' : 
-         Readfile(fp);
-        break;
-      case '4' : 
-         Alterfileauthority(fp);
-        break;
-      case '5' : 
-         Viewfileauthority();
-        break;
-      default:
-         printf("你的输入有误，退出系统！\n");
-         exit(0);
-        break; 
-     }
-     
-
-}
-void Menu()
+void Menu_1()
 {
       printf("********************************\n");
       printf("0. 退出\n");
@@ -62,7 +13,7 @@ void Menu()
       printf("********************************\n");
       printf("Please input your choice(0-5):");
 }
-void Creatfile(FILE *fp)
+void Creatfile_1(FILE *fp)
 {
   char buf[10] ;
   getchar();
@@ -85,11 +36,11 @@ void Creatfile(FILE *fp)
        }
   
 }
-void Writefile(FILE *fp)
+void Writefile_1(FILE *fp)
 {
      char buf[1024];
       getchar();
-     if((fp = open("/home/rlk/2/week7/xb.txt",O_CREAT|O_APPEND|O_RDWR,0666)) < 0){
+     if((fp = open("./xb.txt",O_CREAT|O_APPEND|O_RDWR,0666)) < 0){
         perror("open");
       }
       else{
@@ -115,11 +66,11 @@ void Writefile(FILE *fp)
        }
 
 }
-void Readfile(FILE *fp)
+void Readfile_1(FILE *fp)
 {
      char *buf;
      int front,rear;
-     if((fp = open("/home/rlk/2/week7/xb.txt",O_RDWR,0666)) < 0){
+     if((fp = open("./xb.txt",O_RDWR,0666)) < 0){
         perror("open");
       }
       else{
@@ -137,7 +88,6 @@ void Readfile(FILE *fp)
          printf("读取成功 \n");
       }
       printf("文本内容:%s\n",buf);
-      getchar();
       if(close(fp)<0){
          perror("close");
        }
@@ -146,24 +96,23 @@ void Readfile(FILE *fp)
        }
 
 }
-void Alterfileauthority(FILE *fp)
+void Alterfileauthority_1(FILE *fp)
 {
         int n;
         printf("0.读，写，执行 1.读 2.写 3.执行\n"); 
         printf("请选择修改的权限:"); 
         scanf("%d",&n);
         switch(n){
-           case 0: chmod("/home/rlk/2/week7/xb.txt",S_IRWXU); break;
-           case 1: chmod("/home/rlk/2/week7/xb.txt",S_IRUSR); break;
-           case 2: chmod("/home/rlk/2/week7/xb.txt",S_IWUSR); break;
-           case 3: chmod("/home/rlk/2/week7/xb.txt",S_IXUSR); break;
+           case 0: chmod("./xb.txt",S_IRWXU); break;
+           case 1: chmod("./xb.txt",S_IRUSR); break;
+           case 2: chmod("./xb.txt",S_IWUSR); break;
+           case 3: chmod("./xb.txt",S_IXUSR); break;
            default: printf("你的选择有误请!\n");
         }          
 }
-void Viewfileauthority()
+void Viewfileauthority_1()
 {
         char *path = "/bin/ls";
-        char *argv[4] = {"ls","-l","/home/rlk/2/week7/xb.txt",NULL};
+        char *argv[4] = {"ls","-l","./xb.txt",NULL};
         execv(path,argv);
 }
-
