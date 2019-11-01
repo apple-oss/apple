@@ -25,7 +25,7 @@ int main()
          Alterfileauthority_1(fp);
         break;
       case '5' : 
-         Viewfileauthority_1();
+         Viewfileauthority_1(fp);
         break;
       default:
          printf("你的输入有误，退出系统！\n");

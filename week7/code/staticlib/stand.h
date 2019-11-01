@@ -14,4 +14,4 @@ void Menu_1();
 void Creatfile_1(FILE *fp);
 void Readfile_1(FILE *fp);
 void Alterfileauthority_1(FILE *fp);
-void Viewfileauthority_1();
+void Viewfileauthority_1(FILE *fp);
